@@ -60,7 +60,7 @@ O campo `id_unidade` das notificações é o **código CNES** da unidade notific
 
 ## Tecnologias
 
-TypeScript · React + Vite · Express · PostgreSQL + Drizzle ORM · Leaflet · Recharts · Vitest · Playwright
+TypeScript · React · Express · PostgreSQL
 
 ## Padrão de commits
 
