@@ -60,7 +60,34 @@ O campo `id_unidade` das notificações é o **código CNES** da unidade notific
 
 ## Tecnologias
 
-TypeScript · React · Express · PostgreSQL
+TypeScript · React · Vite · Express · Vitest · Supertest · ESLint · Prettier · PostgreSQL
+
+## Como rodar
+
+Requer Node 24 (`nvm use`).
+
+```bash
+npm install
+cp .env.example .env
+npm run dev:api   # http://localhost:3000
+npm run dev:web   # http://localhost:5173
+```
+
+| Comando | O que faz |
+|---|---|
+| `npm test` | Testes de todos os pacotes |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | Checagem de tipos |
+| `npm run format` | Formata o código com Prettier |
+| `npm run build` | Build de produção do frontend |
+
+## Estrutura
+
+```
+apps/api         backend (Express)
+apps/web         frontend (React + Vite)
+packages/shared  tipos compartilhados entre api e web
+```
 
 ## Padrão de commits
 
