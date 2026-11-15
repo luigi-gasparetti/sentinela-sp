@@ -6,16 +6,25 @@
   "scripts": {
     "dev": "node --env-file-if-exists=../../.env --watch src/index.ts",
     "start": "node --env-file-if-exists=../../.env src/index.ts",
+    "db:generate": "drizzle-kit generate --config drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config drizzle.config.ts",
+    "db:push": "drizzle-kit push --config drizzle.config.ts",
+    "db:seed": "node --env-file-if-exists=../../.env src/db/seed.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
   "dependencies": {
     "@sentinela/shared": "*",
-    "express": "^5.3.0"
+    "dotenv": "^18.0.10",
+    "drizzle-orm": "^1.0.0-rc.5",
+    "express": "^5.3.0",
+    "pg": "^8.23.1"
   },
   "devDependencies": {
+    "@types/pg": "^8.23.1",
     "@types/express": "^5.0.6",
     "@types/supertest": "^7.2.1",
+    "drizzle-kit": "^1.0.0-rc.5",
     "supertest": "^7.3.2",
     "vitest": "^5.1.0"
   }

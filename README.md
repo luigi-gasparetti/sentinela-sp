@@ -64,14 +64,37 @@ TypeScript · React · Vite · Express · Vitest · Supertest · ESLint · Prett
 
 ## Como rodar
 
-Requer Node 24 (`nvm use`).
+Requer Node 24 (`nvm use`) e Docker Compose. O Makefile é opcional e requer
+GNU Make instalado.
 
 ```bash
 npm install
 cp .env.example .env
+make db-setup
 npm run dev:api   # http://localhost:3000
 npm run dev:web   # http://localhost:5173
 ```
+
+O PostgreSQL local fica disponível em `localhost:5432`. Para importar os
+arquivos JSON de exemplo, coloque-os em `data/` (ignorado pelo Git) ou defina
+`SEED_DATA_DIR` no `.env` com o caminho da pasta. `make db-setup` inicia o
+PostgreSQL, sincroniza o schema e importa os dados. Ele não sobrescreve tabelas
+que já tenham dados; para executar as etapas separadamente, use:
+
+```bash
+npm run db:up
+npm run db:push -w @sentinela/api
+npm run db:seed -w @sentinela/api
+```
+
+Por padrão, o importador não sobrescreve dados existentes. Para limpar e
+recarregar as tabelas de unidades, capacidade e notificações, execute
+`npm run db:seed -w @sentinela/api -- --reset`. Use essa opção apenas no banco
+local de desenvolvimento.
+
+Outros comandos úteis: `make db-status` mostra o estado dos serviços e
+`make db-down` para o PostgreSQL sem remover o volume de dados. Sem GNU Make,
+os comandos `npm run` acima continuam disponíveis.
 
 | Comando | O que faz |
 |---|---|
@@ -80,6 +103,10 @@ npm run dev:web   # http://localhost:5173
 | `npm run typecheck` | Checagem de tipos |
 | `npm run format` | Formata o código com Prettier |
 | `npm run build` | Build de produção do frontend |
+| `npm run db:up` | Inicia o PostgreSQL local |
+| `npm run db:down` | Para o PostgreSQL local |
+| `npm run db:push -w @sentinela/api` | Sincroniza o schema com o banco local |
+| `npm run db:seed -w @sentinela/api` | Importa os JSONs de exemplo |
 
 ## Estrutura
 
