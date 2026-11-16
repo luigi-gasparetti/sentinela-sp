@@ -4,7 +4,7 @@ db-up:
 	docker compose up -d --wait
 
 db-schema: db-up
-	npm run db:push -w @sentinela/api
+	npm run db:migrate -w @sentinela/api
 
 db-seed: db-schema
 	npm run db:seed -w @sentinela/api
