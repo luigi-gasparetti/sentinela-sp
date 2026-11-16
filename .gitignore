@@ -9,3 +9,4 @@ coverage/
 
 # Arquivos baixados pelo ETL
 data/
+/.cache/
