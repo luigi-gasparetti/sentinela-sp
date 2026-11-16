@@ -9,6 +9,7 @@ import {
   pgTable,
   serial,
   timestamp,
+  unique,
   uniqueIndex,
   varchar,
 } from 'drizzle-orm/pg-core';
@@ -105,9 +106,61 @@ export const arbovirusNotifications = pgTable(
   ],
 );
 
+// ---------------------------------------------------------------------------
+// Agregados
+//
+// Guardam os totais já calculados pelo ETL (apps/api/src/etl/demas/aggregates.ts),
+// para que a API responda rápido sem somar as notificações a cada requisição.
+// A semana usada é a de início dos sintomas, como no ETL.
+// ---------------------------------------------------------------------------
+
+/** Casos por doença e semana epidemiológica (curva epidêmica, US01 e US03). */
+export const weeklyCaseCounts = pgTable(
+  'weekly_case_counts',
+  {
+    id: serial('id').primaryKey(),
+    disease: arbovirusEnum('disease').notNull(),
+    epiYear: integer('epi_year').notNull(),
+    epiWeek: integer('epi_week').notNull(),
+    total: integer('total').notNull(),
+    computedAt: timestamp('computed_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    unique('weekly_case_counts_disease_week_uq').on(table.disease, table.epiYear, table.epiWeek),
+  ],
+);
+
+/**
+ * Casos por doença, semana e estabelecimento notificador (CNES).
+ * Notificações sem CNES ficam num grupo próprio, com facility_cnes nulo;
+ * por isso a restrição de unicidade trata nulos como iguais (NULLS NOT DISTINCT).
+ */
+export const weeklyCaseCountsByFacility = pgTable(
+  'weekly_case_counts_by_facility',
+  {
+    id: serial('id').primaryKey(),
+    disease: arbovirusEnum('disease').notNull(),
+    epiYear: integer('epi_year').notNull(),
+    epiWeek: integer('epi_week').notNull(),
+    facilityCnes: varchar('facility_cnes', { length: 7 }),
+    total: integer('total').notNull(),
+    computedAt: timestamp('computed_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    unique('weekly_case_counts_by_facility_uq')
+      .on(table.disease, table.epiYear, table.epiWeek, table.facilityCnes)
+      .nullsNotDistinct(),
+    index('weekly_case_counts_by_facility_cnes_idx').on(table.facilityCnes),
+  ],
+);
+
 export type HealthFacility = typeof healthFacilities.$inferSelect;
 export type NewHealthFacility = typeof healthFacilities.$inferInsert;
 export type HospitalCapacitySnapshot = typeof hospitalCapacitySnapshots.$inferSelect;
 export type NewHospitalCapacitySnapshot = typeof hospitalCapacitySnapshots.$inferInsert;
 export type ArbovirusNotification = typeof arbovirusNotifications.$inferSelect;
 export type NewArbovirusNotification = typeof arbovirusNotifications.$inferInsert;
+export type WeeklyCaseCount = typeof weeklyCaseCounts.$inferSelect;
+export type NewWeeklyCaseCount = typeof weeklyCaseCounts.$inferInsert;
+export type WeeklyCaseCountByFacility = typeof weeklyCaseCountsByFacility.$inferSelect;
+export type NewWeeklyCaseCountByFacility = typeof weeklyCaseCountsByFacility.$inferInsert;
