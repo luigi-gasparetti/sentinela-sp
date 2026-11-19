@@ -2,3 +2,6 @@ dist
 coverage
 package-lock.json
 *.md
+
+# Migrations geradas pelo drizzle-kit
+apps/api/drizzle

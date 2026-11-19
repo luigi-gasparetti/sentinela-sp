@@ -31,6 +31,23 @@ jobs:
   test:
     name: Testes
     runs-on: ubuntu-latest
+    # PostgreSQL descartável, só para os testes desta execução.
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: sentinela
+          POSTGRES_PASSWORD: sentinela_ci
+          POSTGRES_DB: sentinela_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U sentinela -d sentinela_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://sentinela:sentinela_ci@localhost:5432/sentinela_test
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -38,6 +55,8 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
+      - name: Aplica as migrations
+        run: npm run db:migrate -w @sentinela/api
       - run: npm test
 
   build:

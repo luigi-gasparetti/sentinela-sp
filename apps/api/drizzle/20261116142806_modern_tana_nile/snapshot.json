@@ -1,0 +1,1092 @@
+{
+  "version": "8",
+  "dialect": "postgres",
+  "id": "4f45b25c-a8fa-4557-b6bb-5a7ea95e354e",
+  "prevIds": [
+    "00000000-0000-0000-0000-000000000000"
+  ],
+  "ddl": [
+    {
+      "values": [
+        "dengue",
+        "chikungunya",
+        "zika"
+      ],
+      "name": "arbovirus",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "primary_care",
+        "hospital"
+      ],
+      "name": "facility_type",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "arbovirus_notifications",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "health_facilities",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "hospital_capacity_snapshots",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "weekly_case_counts",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "weekly_case_counts_by_facility",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "type": "serial",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "arbovirus",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "disease",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "date",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "notified_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "date",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "symptom_onset_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "onset_epi_year",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "onset_epi_week",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "age_years",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "varchar(7)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "residence_municipality_code",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "varchar(7)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "notifying_municipality_code",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "varchar(7)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "reporting_facility_cnes",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "reporting_facility_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "is_confirmed",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "was_hospitalized",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "jsonb",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'{}'",
+      "generated": null,
+      "identity": null,
+      "name": "symptoms",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "jsonb",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'{}'",
+      "generated": null,
+      "identity": null,
+      "name": "warning_signs",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "imported_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "type": "serial",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "varchar(7)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "cnes",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "facility_type",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "type",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "varchar(255)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "varchar(2)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "state_code",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "varchar(7)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "municipality_code",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "varchar(120)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "municipality_name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "varchar(120)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "neighborhood",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "varchar(255)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "street",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "varchar(30)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "street_number",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "varchar(120)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "address_complement",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "varchar(8)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "postal_code",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "varchar(30)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "phone_number",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "numeric(9,6)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "latitude",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "numeric(9,6)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "longitude",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "updated_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "type": "serial",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "hospital_capacity_snapshots"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "facility_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "hospital_capacity_snapshots"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "observed_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "hospital_capacity_snapshots"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "general_beds_total",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "hospital_capacity_snapshots"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "general_beds_sus",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "hospital_capacity_snapshots"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "intensive_care_beds_total",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "hospital_capacity_snapshots"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "intensive_care_beds_sus",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "hospital_capacity_snapshots"
+    },
+    {
+      "type": "serial",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "weekly_case_counts"
+    },
+    {
+      "type": "arbovirus",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "disease",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "weekly_case_counts"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "epi_year",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "weekly_case_counts"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "epi_week",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "weekly_case_counts"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "total",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "weekly_case_counts"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "computed_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "weekly_case_counts"
+    },
+    {
+      "type": "serial",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "weekly_case_counts_by_facility"
+    },
+    {
+      "type": "arbovirus",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "disease",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "weekly_case_counts_by_facility"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "epi_year",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "weekly_case_counts_by_facility"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "epi_week",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "weekly_case_counts_by_facility"
+    },
+    {
+      "type": "varchar(7)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "facility_cnes",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "weekly_case_counts_by_facility"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "total",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "weekly_case_counts_by_facility"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "computed_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "weekly_case_counts_by_facility"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "disease",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        },
+        {
+          "value": "is_confirmed",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        },
+        {
+          "value": "onset_epi_year",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        },
+        {
+          "value": "onset_epi_week",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "arbovirus_notifications_epi_curve_idx",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "residence_municipality_code",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "arbovirus_notifications_residence_idx",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "reporting_facility_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "arbovirus_notifications_facility_idx",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "reporting_facility_cnes",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "arbovirus_notifications_facility_cnes_idx",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "cnes",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": true,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "health_facilities_cnes_idx",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "state_code",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        },
+        {
+          "value": "municipality_code",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "health_facilities_location_idx",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "type",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "health_facilities_type_idx",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "health_facilities"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "facility_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        },
+        {
+          "value": "observed_at",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": true,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "hospital_capacity_facility_observed_idx",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "hospital_capacity_snapshots"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "observed_at",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "hospital_capacity_observed_idx",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "hospital_capacity_snapshots"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "facility_cnes",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "weekly_case_counts_by_facility_cnes_idx",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "weekly_case_counts_by_facility"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "reporting_facility_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "health_facilities",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "SET NULL",
+      "name": "arbovirus_notifications_bU4yxmv3khOi_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "arbovirus_notifications"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "facility_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "health_facilities",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "name": "hospital_capacity_snapshots_Bp9UP29hBCaG_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "hospital_capacity_snapshots"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "arbovirus_notifications_pkey",
+      "schema": "public",
+      "table": "arbovirus_notifications",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "health_facilities_pkey",
+      "schema": "public",
+      "table": "health_facilities",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "hospital_capacity_snapshots_pkey",
+      "schema": "public",
+      "table": "hospital_capacity_snapshots",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "weekly_case_counts_pkey",
+      "schema": "public",
+      "table": "weekly_case_counts",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "weekly_case_counts_by_facility_pkey",
+      "schema": "public",
+      "table": "weekly_case_counts_by_facility",
+      "entityType": "pks"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "disease",
+        "epi_year",
+        "epi_week"
+      ],
+      "nullsNotDistinct": false,
+      "name": "weekly_case_counts_disease_week_uq",
+      "entityType": "uniques",
+      "schema": "public",
+      "table": "weekly_case_counts"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "disease",
+        "epi_year",
+        "epi_week",
+        "facility_cnes"
+      ],
+      "nullsNotDistinct": true,
+      "name": "weekly_case_counts_by_facility_uq",
+      "entityType": "uniques",
+      "schema": "public",
+      "table": "weekly_case_counts_by_facility"
+    }
+  ],
+  "renames": []
+}
