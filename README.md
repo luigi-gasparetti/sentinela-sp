@@ -20,9 +20,9 @@ O Sentinela SP reúne essas informações em uma fonte única, em linguagem aces
 | Épico | User stories |
 |---|---|
 | **E1 – Panorama de arboviroses** | US01 curva epidêmica semanal · US02 distribuição por faixa etária · US03 comparação com o ano anterior |
-| **E2 – Onde buscar atendimento** | US04 catálogo de UBS e hospitais · US05 busca e filtro por tipo · US06 endereço e contato |
+| **E2 – Onde buscar atendimento** | US04 catálogo de UBS e hospitais · US05 busca e filtro por tipo · US06 endereço e rota até a unidade |
 | **E3 – Relato de sintomas e rota de cuidado** | US07 lista de sintomas e sinais de alarme (SINAN) · US08 encaminhamento por protocolo do MS · US09 frequência do conjunto de sintomas entre casos confirmados · US10 aviso não descartável |
-| **E4 – Gravidade e retaguarda** | US11 proporção de internação por faixa etária · US12 capacidade de leitos |
+| **E4 – Gravidade e retaguarda** | US11 proporção de internação por faixa etária · US12 capacidade instalada de leitos |
 | **E5 – Capacidades offline** | US13 cache de estabelecimentos · US14 instalação como PWA |
 | **E6 – Acessibilidade** | US15 alto contraste e escala de fonte · US16 navegação por teclado · US17 linguagem simples |
 
@@ -30,13 +30,15 @@ O Sentinela SP reúne essas informações em uma fonte única, em linguagem aces
 
 ## Fonte de dados
 
-[API de Dados Abertos do Ministério da Saúde (DEMAS)](https://apidadosabertos.saude.gov.br/v1/)
+[API de Dados Abertos do Ministério da Saúde (DEMAS)](https://apidadosabertos.saude.gov.br/v1/), base `https://apidadosabertos.saude.gov.br` (os endpoints não usam o prefixo `/v1`)
 
 | Endpoint | Uso |
 |---|---|
-| `/arboviroses/dengue`, `/arboviroses/chikungunya`, `/arboviroses/zikavirus` | Notificações (SINAN) |
+| `/arboviroses/chikungunya`, `/arboviroses/zikavirus` | Notificações (SINAN) |
 | `/assistencia-a-saude/unidade-basicas-de-saude` | UBS |
-| `/assistencia-a-saude/hospitais-e-leitos` | Hospitais e leitos |
+| `/assistencia-a-saude/hospitais-e-leitos` | Hospitais e leitos cadastrados (sem ocupação) |
+
+As notificações de **dengue** vêm dos [microdados SINAN do OpenDataSUS](https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINAN/Dengue/csv/) (`DENGBR25.csv.zip` e `DENGBR26.csv.zip`), pois o endpoint `/arboviroses/dengue` não responde para anos recentes (#37).
 
 O campo `id_unidade` das notificações é o **código CNES** da unidade notificadora. Ele permite ligar cada notificação ao estabelecimento que a registrou.
 
