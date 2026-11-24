@@ -10,6 +10,7 @@
     "db:migrate": "drizzle-kit migrate --config drizzle.config.ts",
     "db:push": "drizzle-kit push --config drizzle.config.ts",
     "db:seed": "node --env-file-if-exists=../../.env src/db/seed.ts",
+    "etl:facilities": "node --env-file-if-exists=../../.env src/etl/facilities/run.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
